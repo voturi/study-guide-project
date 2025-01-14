@@ -1,0 +1,50 @@
+{
+    "CallerReference": "cli-example",
+    "Aliases": {
+        "Quantity": 0
+    },
+    "DefaultRootObject": "index.html",
+    "Origins": {
+        "Quantity": 1,
+        "Items": [
+            {
+                "Id": "S3-study-guide-project-2",
+                "DomainName": "study-guide-project-2.s3-website-ap-southeast-2.amazonaws.com",
+                "CustomOriginConfig": {
+                    "HTTPPort": 80,
+                    "HTTPSPort": 443,
+                    "OriginProtocolPolicy": "http-only"
+                }
+            }
+        ]
+    },
+    "DefaultCacheBehavior": {
+        "TargetOriginId": "S3-study-guide-project-2",
+        "ViewerProtocolPolicy": "redirect-to-https",
+        "MinTTL": 0,
+        "AllowedMethods": {
+            "Quantity": 2,
+            "Items": ["GET", "HEAD"],
+            "CachedMethods": {
+                "Quantity": 2,
+                "Items": ["GET", "HEAD"]
+            }
+        },
+        "SmoothStreaming": false,
+        "DefaultTTL": 86400,
+        "MaxTTL": 31536000,
+        "Compress": true,
+        "ForwardedValues": {
+            "QueryString": false,
+            "Cookies": {
+                "Forward": "none"
+            }
+        }
+    },
+    "Comment": "Distribution for study-guide-project",
+    "PriceClass": "PriceClass_100",
+    "Enabled": true,
+    "ViewerCertificate": {
+        "CloudFrontDefaultCertificate": true
+    }
+}

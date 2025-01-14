@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Building the React application...
+      - npm run build
+  post_build:
+    commands:
+      - echo Deploying to S3...
+      - aws s3 sync dist s3://study-guide-project-2 --delete
+      - echo Invalidating CloudFront cache...
+      - aws cloudfront create-invalidation --distribution-id E355OOYTVZCBT --paths "

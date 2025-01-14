@@ -1,0 +1,88 @@
+{
+    "pipeline": {
+        "name": "study-guide-project-pipeline",
+        "roleArn": "arn:aws:iam::738322522222:role/CodePipelineServiceRole",
+        "artifactStore": {
+            "type": "S3",
+            "location": "study-guide-project-2"
+        },
+        "stages": [
+            {
+                "name": "Source",
+                "actions": [
+                    {
+                        "name": "Source",
+                        "actionTypeId": {
+                            "category": "Source",
+                            "owner": "AWS",
+                            "provider": "CodeCommit",
+                            "version": "1"
+                        },
+                        "configuration": {
+                            "RepositoryName": "study-guide-project",
+                            "BranchName": "main"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "runOrder": 1
+                    }
+                ]
+            },
+            {
+                "name": "Build",
+                "actions": [
+                    {
+                        "name": "Build",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "provider": "CodeBuild",
+                            "version": "1"
+                        },
+                        "configuration": {
+                            "ProjectName": "study-guide-project-build"
+                        },
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "outputArtifacts": [
+                            {
+                                "name": "BuildArtifact"
+                            }
+                        ],
+                        "runOrder": 1
+                    }
+                ]
+            },
+            {
+                "name": "Deploy",
+                "actions": [
+                    {
+                        "name": "Deploy",
+                        "actionTypeId": {
+                            "category": "Deploy",
+                            "owner": "AWS",
+                            "provider": "S3",
+                            "version": "1"
+                        },
+                        "configuration": {
+                            "BucketName": "study-guide-project-2",
+                            "Extract": "true"
+                        },
+                        "inputArtifacts": [
+                            {
+                                "name": "BuildArtifact"
+                            }
+                        ],
+                        "runOrder": 1
+                    }
+                ]
+            }
+        ]
+    }
+}

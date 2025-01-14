@@ -1,0 +1,37 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Resource": [
+          "arn:aws:logs:ap-southeast-2:738322522222:log-group:/aws/codebuild/study-guide-project-build",
+          "arn:aws:logs:ap-southeast-2:738322522222:log-group:/aws/codebuild/study-guide-project-build:*"
+        ],
+        "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+      },
+      {
+        "Effect": "Allow",
+        "Resource": [
+          "arn:aws:s3:::study-guide-project-2",
+          "arn:aws:s3:::study-guide-project-2/*"
+        ],
+        "Action": [
+          "s3:GetObject",
+          "s3:GetObjectVersion",
+          "s3:GetBucketVersioning",
+          "s3:PutObject"
+        ]
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "cloudfront:CreateInvalidation"
+        ],
+        "Resource": "*"
+      }
+    ]
+  }
