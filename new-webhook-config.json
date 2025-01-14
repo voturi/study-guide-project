@@ -1,0 +1,18 @@
+{
+  "webhook": {
+    "name": "study-guide-project-webhook",
+    "targetPipeline": "study-guide-project-pipeline",
+    "targetAction": "Source",
+    "filters": [
+      {
+        "jsonPath": "$.ref",
+        "matchEquals": "refs/heads/{Branch}"
+      }
+    ],
+    "authentication": "GITHUB_HMAC",
+    "authenticationConfiguration": {
+      "SecretToken": "{{resolve:secretsmanager:GitHub-Webhook-Secret:SecretString:token}}"
+    }
+  }
+}
+
