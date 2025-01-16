@@ -12,6 +12,11 @@ phases:
     commands:
       - echo Building the React application...
       - npm run build
+  artifacts:
+    files:
+     - '**/*'
+    base-directory: build
+    discard-paths: no
   post_build:
     commands:
       - echo Deploying to S3...
